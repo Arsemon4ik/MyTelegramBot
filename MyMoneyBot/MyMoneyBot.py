@@ -5,14 +5,26 @@ from extensions import CryptoConverter, ConvertionException
 bot = telebot.TeleBot(TOKEN)
 
 
-@bot.message_handler(commands = ['start','help'])
+@bot.message_handler(commands = ['start'])
 def help(message):
     text = '''Чтобы начать работу введите команду бота в следующем формате:\n<Имя валюты> \
 <в какую валюту перевести> \
 <количество переводимой валюты>\n
 Например вот так: евро гривна 1 (вам выведет текущий курс первой валюты во вторую)\n
 Увидеть список всех валют: /values'''
-    bot.reply_to(message,text)
+
+    bot.reply_to(message, f'Привет, {message.chat.username}')
+    bot.send_message(message.chat.id, text)
+
+@bot.message_handler(commands = ['help'])
+def help(message):
+    text = '''Чтобы начать работу введите команду бота в следующем формате:\n<Имя валюты> \
+<в какую валюту перевести> \
+<количество переводимой валюты>\n
+Например вот так: евро гривна 1 (вам выведет текущий курс первой валюты во вторую)\n
+Увидеть список всех валют: /values'''
+    bot.reply_to(message, text)
+
 
 
 
